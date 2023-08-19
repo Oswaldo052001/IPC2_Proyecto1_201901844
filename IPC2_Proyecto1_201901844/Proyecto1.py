@@ -4,7 +4,13 @@ from colorama import Fore
 from tkinter import messagebox
 from tkinter import filedialog
 
+## Importando clases
+from ListaEnlazada import Listaenlazada
+
 class Inicio():
+
+    Senales = Listaenlazada()    ##Variable donde se van a almacenar las señales ingresadas que practicamente son tablas
+     
 
     def __init__(self):
         self.IniciarPrograma()
@@ -36,7 +42,7 @@ class Inicio():
                 if opcion2 > 7 or opcion2 < 1:
                     print(Fore.RED +"\n Ingrese una opcion validad, por favor : \n")
                 if opcion2 == 1:
-                    pass
+                    self.leer()
                 if opcion2 == 2:
                     pass
                 if opcion2 == 3:
@@ -56,7 +62,7 @@ class Inicio():
     def leer(self):
 
             filename = filedialog.askopenfilename(title="buscar archivo",filetypes=(("archivos lfp",'*.lfp'),("todos los archivos",'*')))
-
+            print(filename)
             try:
                 ##LECTOR DEL XMS
                         
