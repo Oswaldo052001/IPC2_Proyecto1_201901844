@@ -1,6 +1,6 @@
-
-
 import xml.etree.ElementTree as ET
+from ListaEnlazada import Listaenlazada
+from Senal import Senal
 
 class xml():
 
@@ -11,20 +11,29 @@ class xml():
 
     
     def getSenal(self):
+
+        listSenales = Listaenlazada()
+
         for senal in self.senales.findall('senal'):
             nombre = senal.get('nombre')
             tiempoMax = senal.get("t")
             amplitudMax = senal.get("A")
+            tmpSenal = Senal(nombre, tiempoMax, amplitudMax)
+            listSenales.agregarFinal(tmpSenal)
+        
+        print("--------- Lista de senales----------")
+        senalGuardada = listSenales.getInicio()
+        while senalGuardada != None:
+            print(senalGuardada.getDato().getNombre())
+            senalGuardada = senalGuardada.getSiguiente()
             
-            
-        print("nombre: "+nombre)
-        print("tiempo maximo: "+tiempoMax)
-        print("amplitud maxima: "+amplitudMax)
+        #print("nombre: "+nombre)
+        #print("tiempo maximo: "+tiempoMax)
+        #print("amplitud maxima: "+amplitudMax)
 
-        self.VerificarRepetidos(senal)
-        self.buscar(senal)
-        self.imprimir(senal)
-    
+        #self.VerificarRepetidos(senal)
+        #self.imprimir(senal)
+        
     def VerificarRepetidos(self,senal):
 
         for datos in senal:
@@ -42,15 +51,13 @@ class xml():
 
                 self.datoguardado = valor
             
-    def buscar(self,senales):
-        for datos in senales:
-            valor = datos.get("t").find("2")
-
-            print(valor)
+    def getDatos(self,senal):     ##PENDIENTE PARA SET LOS DATOS 
+        for datos in senal:
+            pass
   
 
-    def imprimir(self, senales):
-        for datos in senales:
+    def imprimir(self, senal):
+        for datos in senal:
             tiempo = datos.get("t")
             amplitud = datos.get("A")
             valor= int(datos.text)

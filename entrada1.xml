@@ -2,8 +2,6 @@
 <senales>
    <senal nombre="Prueba1" t="5" A="4">
       <dato t="1" A="1">2</dato>
-      <dato t="1" A="1">7</dato>
-      <dato t="1" A="1">9</dato>
       <dato t="1" A="2">3</dato>
       <dato t="1" A="3">0</dato>
       <dato t="1" A="4">4</dato>
