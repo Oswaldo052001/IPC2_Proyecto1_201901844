@@ -1,4 +1,4 @@
-from ListaEnlazada import Listaenlazada
+'''from ListaEnlazada import Listaenlazada
 from Nodo import Nodo
 from Senal import Senal
 
@@ -33,12 +33,34 @@ for senal in doc:
         valor= int(datos.text)
         print("tiempo = "+tiempo+ " amplitud ="+amplitud+ " Valor ="+str(valor))
 
-
+    
     print(nombre)
     print(tiempoMax)
-    print(amplitudMax)
+    print(amplitudMax)'''
 
 
+#print ("{:<8} {:<15}".format('Tiempo','Amplitudes'))
+
+import pandas as pd
+
+datos = [[10, 11, 12, 13],
+          [20, 21, 22, 23],
+          [30, 31, 32, 33]]
+
+df = pd.DataFrame(data ='A B C'.split() ,index='A B C'.split(),columns='W'.split())
+
+print(df)
+
+hola = "| "
+hola += "ti"
+
+print(hola)
+
+
+p = False
+
+if p:
+    print("MAÑANA")
     
 
 

@@ -4,12 +4,13 @@ from Amplitud import Amplitud
 
 class Tiempo():
 
-    def __init__(self,tiempo, amplitud) :
+    def __init__(self,tiempo, amplitud, grupo = None) :
         self.tiempo = tiempo
         self.amplitud = amplitud
-        self.ListaAmplitudes = Listaenlazada()
-        self.llenarListadoAmplitudes()
-        self.imprimir()
+        self.grupo = grupo
+        self.ListaAmplitudes = Listaenlazada()    #Esta Lista almacenará las amplitudes hasta amplitudes maximas
+        self.llenarListadoAmplitudes()            #La clase tiempo va a tener almacenados la lista de amplitudes
+        #self.imprimir()
 
     
     def getTiempo(self):
@@ -19,9 +20,15 @@ class Tiempo():
         return self.amplitud
     
     def llenarListadoAmplitudes(self): 
-        for i in range (1, int(self.amplitud)+1):
-            tmpamplitud = Amplitud(i)
-            self.ListaAmplitudes.agregarFinal(tmpamplitud)
+        for i in range (1, int(self.amplitud)+1):           #Creando la lista de amplitudes hasta amplitud maxima
+            tmpamplitud = Amplitud(i)                       #Creando los objetos amplitudes
+            self.ListaAmplitudes.agregarFinal(tmpamplitud)  #Insertando los objetos a la lista de amplitudes
+
+    def getGrupo(self):
+        return self.grupo
+
+    def setGrupo(self,grupopertenece):
+        self.grupo = grupopertenece
 
     def imprimir(self):
         print("_____Amplitudes para tiempo: ", self.getTiempo(), "________")
