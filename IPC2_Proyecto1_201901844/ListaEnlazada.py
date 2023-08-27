@@ -33,10 +33,10 @@ class Listaenlazada():
             print(tmp.getDato())
             tmp = tmp.getSiguiente()
 
-    def graficar(self):
+'''    def graficar(self):
         graph = Graph()
         tmp = self.nodoInicio
         while tmp != None:
             graph.add(tmp, tmp.getSiguiente())
             tmp = tmp.getSiguiente()
-        graph.generar()
+        graph.generar()'''

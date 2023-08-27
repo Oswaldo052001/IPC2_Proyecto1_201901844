@@ -11,7 +11,7 @@ class Senal():
         self.AmplitudMax = AmplitudMax
         self.ListaTiempos = Listaenlazada()    #Esta Lista almacenará los tiempos hasta tiempo Maximo
         self.crearListaTiempos()               # La clase senal va a tener almacenados la lista de tiempos
-        self.imprimir()
+        #self.imprimir()
 
     def getNombre(self):
         return self.nombre
@@ -26,8 +26,7 @@ class Senal():
         for i in range (1, int(self.tiempoMax)+1):          #Creando la lista de tiempos hasta tiempo maximo
             objTiempo  = Tiempo(i, self.AmplitudMax )       #Creando los objetos tiempos
             self.ListaTiempos.agregarFinal(objTiempo)       #Insertando los objetos a la lista de tiempos
-
-        
+    
     def imprimir(self):
         print("_____Tiempos para senal: ", self.getNombre(), "________")
         ObjTiempo = self.ListaTiempos.getInicio()
