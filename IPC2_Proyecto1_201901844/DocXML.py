@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 from ListaEnlazada import Listaenlazada
 from Senal import Senal
 from CalculosSenales import Calculos
+from Graph import Graph
 
 class xml():
 
@@ -28,14 +29,12 @@ class xml():
         senalGuardada = self.listSenales.getInicio()
 
         while senalGuardada != None:
-            print(senalGuardada.getDato().getNombre()) 
             self.IngresandoDatos(senalGuardada.getDato())     # Aguardando los datos de cada senal
             senalGuardada = senalGuardada.getSiguiente()
         
 
             
     def IngresandoDatos(self,SenalGuardada):    
-
 
         lstTiempo = SenalGuardada.ListaTiempos   # Variable que almacena la lista de Tiempos
         
@@ -50,8 +49,6 @@ class xml():
                     tiempo = datos.get("t")                # tiempo       
                     amplitud = datos.get("A")              # Amplitud
                     valor= datos.text                      # Valor
-
-                    #print("tiempo = "+tiempo+ " amplitud ="+amplitud+ " Valor ="+str(valor))
                    
                     objtiempo = lstTiempo.getInicio()     # Obteniendo el nodo inicial de la lista de tiempos              
                     while objtiempo != None:
@@ -70,14 +67,18 @@ class xml():
                             objamplitud = objamplitud.getSiguiente()   # Si no cumple ir cambiando de nodo
                         objtiempo = objtiempo.getSiguiente()           # Si no cumple ir cambiando de nodo
 
-                Calculos(SenalGuardada)
+                #Calculos(SenalGuardada)
+                #nombre = SenalGuardada.getNombre()
+                #x =  Graph(SenalGuardada,nombre)
+                #x.crearGraficaOriginal()
+
                 
 
             
 
             
 
-objeto = xml("C:/Users/bryan/Documents/Oswaldo/USAC/2023/SEGUNDO SEMESTRE 2023/IPC 2/LABORATORIO/Proyecto 1/entrada1.xml")
+#objeto = xml("C:/Users/bryan/Documents/Oswaldo/USAC/2023/SEGUNDO SEMESTRE 2023/IPC 2/LABORATORIO/Proyecto 1/entrada1.xml")
 #objeto.getSenal()
 
 

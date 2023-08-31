@@ -1,6 +1,7 @@
 from copy import copy
 from ListaEnlazada import Listaenlazada
 from Grupos import Grupos
+from Graph import Graph
 
 class Calculos():        # Esta clase va a calcular la matriz binaria, matriz de frecuencias y imprimir la matriz ingresada
     
@@ -97,12 +98,12 @@ class Calculos():        # Esta clase va a calcular la matriz binaria, matriz de
             objtiempo = objtiempo.getSiguiente()
 
         self.totaldegrupos = contador - 1
-        self.comprobar2()
-        self.comprobar()
+        self.TiemposGrupo(self.SenalEnviada)
+        self.CreandoMatrizReducida()
 
         
-    def comprobar2(self):
-        lstTiempo = self.SenalEnviada.ListaTiempos   # Variable que almacena la lista de Tiempos
+    def TiemposGrupo(self,matriz):
+        lstTiempo = matriz.ListaTiempos   # Variable que almacena la lista de Tiempos
         objtiempo = lstTiempo.getInicio()     # Obteniendo el nodo inicial de la lista de tiempos
 
         for i in range (self.totaldegrupos): 
@@ -118,7 +119,7 @@ class Calculos():        # Esta clase va a calcular la matriz binaria, matriz de
             print(nombre)
     
     
-    def comprobar(self):
+    def CreandoMatrizReducida(self):
         
         lstTiempo = self.SenalEnviada.ListaTiempos   # Variable que almacena la lista de Tiempos
         amplitudmax = self.SenalEnviada.getAmplitudMaxima()  # La aplitud de cada grupo siempre es la misma ingresada de la senal
@@ -135,23 +136,41 @@ class Calculos():        # Esta clase va a calcular la matriz binaria, matriz de
         while objgrupo != None:
             objamplitudGrupo = objgrupo.getDato().ListaAmplitudes.getInicio()     # Obteniendo el nodo inicial de la lista de amplitudes
             objtiempo = lstTiempo.getInicio()     # Obteniendo el nodo inicial de la lista de tiempos
+            tiemposcontiene = ""
 
             while objtiempo != None: 
                 objamplitud = objtiempo.getDato().ListaAmplitudes.getInicio()     # Obteniendo el nodo inicial de la lista de amplitudes
 
                 if str(objtiempo.getDato().getGrupo()) == "grupo"+str(objgrupo.getDato().getTiempo()):                                                  # Este while va a recorer cada amplitud de cada tiempo 
                     self.SumaDeAmplitudes(objamplitudGrupo,objamplitud)
+                    tiemposcontiene += str(objtiempo.getDato().getTiempo())+","
 
 
                 objamplitud = objamplitud.getSiguiente()   # Si no cumple ir cambiando de nodo    
                 objtiempo = objtiempo.getSiguiente()
 
-                
+            objgrupo.getDato().setGrupo(tiemposcontiene)
             objamplitudGrupo = objamplitudGrupo.getSiguiente()   # Si no cumple ir cambiando de nodo
             objgrupo = objgrupo.getSiguiente()           # Si no cumple ir cambiando de nodo
 
         self.imprimirSenal(tmpSenal,"Matriz Reducida","G")
 
+        #nombre = tmpSenal.getNombre()+"_reducida"
+        #y = Graph(tmpSenal,nombre)
+        #y.crearGraficaReducida()
+        #self.comprobrar3(tmpSenal)
+
+
+
+    def comprobrar3(self,matriz):
+        lstTiempo = matriz.ListaTiempos   # Variable que almacena la lista de Tiempos
+        objtiempo = lstTiempo.getInicio()     # Obteniendo el nodo inicial de la lista de tiempos
+
+
+        while objtiempo != None: 
+            print(objtiempo.getDato().getGrupo())
+            objtiempo = objtiempo.getSiguiente()
+            
        
 
     def SumaDeAmplitudes(self,lista1,lista2):
@@ -177,7 +196,7 @@ class Calculos():        # Esta clase va a calcular la matriz binaria, matriz de
         return Esigual
 
         
-
+   
 
 
     
