@@ -6,7 +6,8 @@ from tkinter import filedialog
 from DocXML import xml
 from CalculosSenales import Calculos
 from Graph import Graph
-
+from Archivo import Archivo
+from ListaEnlazada import Listaenlazada
 
 class Inicio():
 
@@ -14,6 +15,7 @@ class Inicio():
     def __init__(self):
 
         self.SenalesIngresadas = False
+        self.SenalesProcesadas = False
         self.IniciarPrograma()
 
 
@@ -60,10 +62,6 @@ class Inicio():
         
 
 
-
-        
-
-
 #------------------------------------------------- INICIO PRINCIPAL ---------------------------------------------------
     def IniciarPrograma(self):   
         fin = True 
@@ -85,7 +83,11 @@ class Inicio():
                         messagebox.showerror(message="No se ha ingresado el documento xml", title="ERROR")
 
                 if opcion2 == 3:
-                    pass
+                    if self.SenalesIngresadas == True and self.SenalesProcesadas == True:
+                        Archivo().CrearArchivo()
+                        messagebox.showinfo(message="Se creó el archivo correctamente", title="Msg")  # Si no hubo problema mostrará este mensaje 
+                    else:
+                         messagebox.showerror(message="No se ha procesado ninguna senal", title="ERROR")
 
                 if opcion2 == 4:
                     self.InformacionEstudiante()
@@ -95,8 +97,13 @@ class Inicio():
                     self.MostrarGrafica()
                 
                 if opcion2 == 6:
-                    pass
-                
+                    self.SenalesIngresadas = False
+                    self.SenalesProcesadas = False
+                    xml.listSenales = None
+                    xml.listSenales = Listaenlazada()
+                    Calculos.listTablaGrupos = None
+                    Calculos.listTablaGrupos = Listaenlazada()
+                    
                 if opcion2 == 7:
                     fin = False      
             except:
@@ -112,7 +119,7 @@ class Inicio():
                 xml(filename)               #Ingresando a la clase xml y almacenando la imformación del xml
                 messagebox.showinfo(message="SE CARGO CORRECTAMENTE", title="Msg")  # Si no hubo problema mostrará este mensaje 
                 self.SenalesIngresadas = True
-                  
+                    
             except:
                 messagebox.showinfo(message="A OCURRIDO UN ERROR AL CARGAR EL ARCHIVO \n VUELVA A INTENTARLO", title="ERROR")  # Si hubo problema mostrará este mensaje
 
@@ -154,6 +161,7 @@ class Inicio():
 
                         else:
                             messagebox.showinfo(message="Se procesó correctamente", title="Mensaje")           #Mostrar mensaje de que se graficó
+                            self.SenalesProcesadas = True
 
                         pasar = input(Fore.LIGHTGREEN_EX +"\nPresione cualquier tecla para continuar")        # Haciendo un pausa antes de volver al menu procesar    
 
@@ -219,8 +227,5 @@ class Inicio():
         
                     except:
                         messagebox.showerror(message="Ha ingresado un valor incorrecto, vuelva a intentarlo", title="ERROR")
-
-
-
 
 app = Inicio()

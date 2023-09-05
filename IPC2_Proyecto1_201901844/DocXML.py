@@ -3,12 +3,14 @@ from ListaEnlazada import Listaenlazada
 from Senal import Senal
 from CalculosSenales import Calculos
 from Graph import Graph
+from Archivo import Archivo
 
 class xml():
 
     listSenales = Listaenlazada()
 
     def __init__(self,ruta):
+        
         self.senales = ET.parse(ruta).getroot()
         self.getSenal()
         
@@ -21,6 +23,12 @@ class xml():
             nombre = senal.get('nombre')  # Obteniendo nombre de la senal
             tiempoMax = senal.get("t")    # Obteniendo tiempo de la senal
             amplitudMax = senal.get("A")  # Obteniendo amplitud de la senal
+
+            if int(tiempoMax) > 3600:   # Validando numero maximo de tiempos
+                tiempoMax = 3600
+            
+            if int(amplitudMax) > 130: # Validando numero maximo de amplitudes
+                amplitudMax = 130
 
             tmpSenal = Senal(nombre, tiempoMax, amplitudMax)   ## Creando las senalas que hay en el xml
             self.listSenales.agregarFinal(tmpSenal)  # Agreando las senales a la lista senales
@@ -68,6 +76,7 @@ class xml():
                         objtiempo = objtiempo.getSiguiente()           # Si no cumple ir cambiando de nodo
 
                 #Calculos(SenalGuardada)
+                #Archivo().CrearArchivo()
                 #nombre = SenalGuardada.getNombre()
                 #x =  Graph(SenalGuardada,nombre)
                 #x.crearGraficaOriginal()
