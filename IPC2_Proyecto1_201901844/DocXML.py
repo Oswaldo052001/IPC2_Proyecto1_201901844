@@ -2,12 +2,15 @@ import xml.etree.ElementTree as ET
 from ListaEnlazada import Listaenlazada
 from Senal import Senal
 from CalculosSenales import Calculos
+from Graph import Graph
+from Archivo import Archivo
 
 class xml():
 
     listSenales = Listaenlazada()
 
     def __init__(self,ruta):
+        
         self.senales = ET.parse(ruta).getroot()
         self.getSenal()
         
@@ -21,6 +24,12 @@ class xml():
             tiempoMax = senal.get("t")    # Obteniendo tiempo de la senal
             amplitudMax = senal.get("A")  # Obteniendo amplitud de la senal
 
+            if int(tiempoMax) > 3600:   # Validando numero maximo de tiempos
+                tiempoMax = 3600
+            
+            if int(amplitudMax) > 130: # Validando numero maximo de amplitudes
+                amplitudMax = 130
+
             tmpSenal = Senal(nombre, tiempoMax, amplitudMax)   ## Creando las senalas que hay en el xml
             self.listSenales.agregarFinal(tmpSenal)  # Agreando las senales a la lista senales
 
@@ -28,14 +37,12 @@ class xml():
         senalGuardada = self.listSenales.getInicio()
 
         while senalGuardada != None:
-            print(senalGuardada.getDato().getNombre()) 
             self.IngresandoDatos(senalGuardada.getDato())     # Aguardando los datos de cada senal
             senalGuardada = senalGuardada.getSiguiente()
         
 
             
     def IngresandoDatos(self,SenalGuardada):    
-
 
         lstTiempo = SenalGuardada.ListaTiempos   # Variable que almacena la lista de Tiempos
         
@@ -50,8 +57,6 @@ class xml():
                     tiempo = datos.get("t")                # tiempo       
                     amplitud = datos.get("A")              # Amplitud
                     valor= datos.text                      # Valor
-
-                    #print("tiempo = "+tiempo+ " amplitud ="+amplitud+ " Valor ="+str(valor))
                    
                     objtiempo = lstTiempo.getInicio()     # Obteniendo el nodo inicial de la lista de tiempos              
                     while objtiempo != None:
@@ -70,14 +75,19 @@ class xml():
                             objamplitud = objamplitud.getSiguiente()   # Si no cumple ir cambiando de nodo
                         objtiempo = objtiempo.getSiguiente()           # Si no cumple ir cambiando de nodo
 
-                Calculos(SenalGuardada)
+                #Calculos(SenalGuardada)
+                #Archivo().CrearArchivo()
+                #nombre = SenalGuardada.getNombre()
+                #x =  Graph(SenalGuardada,nombre)
+                #x.crearGraficaOriginal()
+
                 
 
             
 
             
 
-objeto = xml("C:/Users/bryan/Documents/Oswaldo/USAC/2023/SEGUNDO SEMESTRE 2023/IPC 2/LABORATORIO/Proyecto 1/entrada1.xml")
+#objeto = xml("C:/Users/bryan/Documents/Oswaldo/USAC/2023/SEGUNDO SEMESTRE 2023/IPC 2/LABORATORIO/Proyecto 1/entrada1.xml")
 #objeto.getSenal()
 
 
